@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  
+  <script type="module" crossorigin src="/api-fetch-js/index-47f49f08.js"></script>
+  <link rel="stylesheet" href="/api-fetch-js/index-632e436f.css">
+</head>
+
+<body>
+  <main class="min-w-screen min-h-screen p-3 flex">
+    <section
+      class="flex-1 flex flex-col justify-evenly  bg-white-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+      <h1 class="text-3xl md:text-5xl lg:text-7xl text-center text-white underline">Fetch</h1>
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                No.
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Name
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <nav class="flex items-center justify-between p-4" aria-label="Table navigation">
+          <ul class="inline-flex -space-x-px text-sm h-8">
+            <li>
+              <button
+                class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+                onclick="getUsuarios(1)">1</button>
+            </li>
+            <li>
+              <button
+                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+                onclick="getUsuarios(2)">2</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
