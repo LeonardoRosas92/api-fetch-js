@@ -1,5 +1,4 @@
 const tbody = document.querySelector("tbody");
-
 const crearFila = (user) => {
   const tr = document.createElement("tr");
   tr.classList.add("bg-white", "border-b", "hover:bg-gray-50");
@@ -39,12 +38,42 @@ const removeAllChildNodes = (parent) => {
     parent.removeChild(parent.firstChild);
   }
 };
-const getUsuarios = async (page = 1) => {
-  const url = `https://reqres.in/api/users?page=${page}&delay=3`;
+const crearTabla = (data = []) => {
+  removeAllChildNodes(tbody);
+  data.forEach(user => {
+    crearFila(user);
+  });
+};
+const getUsuariosAsync = async () => {
+  const url = "https://reqres.in/api/users?&delay=10";
   const response = await fetch(url);
   const { data } = await response.json();
-  removeAllChildNodes(tbody);
-  data.forEach(async user => await crearFila(user));
+  return data;
 };
+const crearStorage = (data) => {
+  const timeSesion = Date.now();
+  const sesion = { data, timeSesion };
+  localStorage.setItem("sesion", JSON.stringify(sesion));
+};
+const getStorage = () => JSON.parse(localStorage.getItem("sesion"));
+const validarSesion = () => {
+  const sesion = JSON.parse(localStorage.getItem("sesion"));
+  const expiro = ((new Date() - new Date(sesion.timeSesion)) / 60000) < 1;
+  return expiro;
+};
+const getUsuarios = async () => {
+  const sesionValida = validarSesion();
+  if (sesionValida) {
+    console.log("Obtenemos datos de localstorage");
+    const sesion = getStorage();
+    crearTabla(sesion.data);
+  } else {
+    console.log("Obtenemos datos de api");
+    const data = await getUsuariosAsync();
+    crearStorage(data);
+    crearTabla(data);
+  }
+};
+
 window.getUsuarios = getUsuarios;
 getUsuarios(1);
