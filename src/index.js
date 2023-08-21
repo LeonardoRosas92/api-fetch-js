@@ -1,4 +1,5 @@
 const tbody = document.querySelector("tbody");
+const parrafo = document.querySelector("p");
 const crearFila = (user) => {
   const tr = document.createElement("tr");
   tr.classList.add("bg-white", "border-b", "hover:bg-gray-50");
@@ -63,17 +64,24 @@ const validarSesion = () => {
   }
   return null;
 };
+const mostrarMensaje = (msg) => {
+  parrafo.innerText = msg;
+};
 const getUsuarios = async () => {
   const sesionValida = validarSesion();
   if (sesionValida) {
     console.log("Obtenemos datos de localstorage");
     const sesion = getStorage();
     crearTabla(sesion.data);
+    const date = new Date(sesion.timeSesion);
+    const hora = `${date.getHours()}:${date.getMinutes() + 1}:${date.getSeconds()}`;
+    mostrarMensaje(`Obtenemos datos de localstorage, expiran a las ${hora}`);
   } else {
     console.log("Obtenemos datos de api");
     const data = await getUsuariosAsync();
     crearStorage(data);
     crearTabla(data);
+    mostrarMensaje("Obtenemos datos de api");
   }
 };
 
