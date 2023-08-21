@@ -58,8 +58,10 @@ const crearStorage = (data) => {
 const getStorage = () => JSON.parse(localStorage.getItem("sesion"));
 const validarSesion = () => {
   const sesion = JSON.parse(localStorage.getItem("sesion"));
-  const expiro = ((new Date() - new Date(sesion.timeSesion)) / 60000) < 1;
-  return expiro;
+  if (sesion) {
+    return ((new Date() - new Date(sesion.timeSesion)) / 60000) < 1;
+  }
+  return null;
 };
 const getUsuarios = async () => {
   const sesionValida = validarSesion();
